@@ -1,13 +1,18 @@
+require_relative "./regexpert/regex"
+
 module Regexpert
   class << self
     def generate(regex)
       regex = regex.inspect[1..-2]
+      str   = ""
 
-      if regex.match(/\./) || regex.match(/\\w/)
-        "a"
-      elsif regex.match(/\\d/)
-        "1"
+      Regex.matchers.each do |exp, val|
+        if regex.match(exp)
+          str << val
+        end
       end
+
+      str
     end
   end
 end
