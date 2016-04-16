@@ -7,7 +7,6 @@ module Regexpert
         "a"
       elsif regex.match(/\\d/)
         "1"
-      elsif regex.mat
       end
     end
   end
