@@ -1,11 +1,17 @@
 module Regexpert
   class Generator
-    def generate(regex)
-      regex = regex.inspect[1..-2]
+    attr_accessor :regex
+
+    def initialize(regex)
+      @regex = regex
+    end
+
+    def generate!
+      expression = regex.inspect[1..-2]
       str   = ""
 
       Regex.matchers.each do |exp, val|
-        if regex.match(exp)
+        if expression.match(exp)
           str << val
         end
       end
