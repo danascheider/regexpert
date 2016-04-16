@@ -1,6 +1,6 @@
 require "coveralls"
 
-Coveralls.wear! if ENV["COVERAGE"]
+Coveralls.wear! if ENV["COVERAGE"] == "true"
 
 require "rspec"
 require "rspec/expectations"
