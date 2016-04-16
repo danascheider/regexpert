@@ -3,20 +3,34 @@ module Regexpert
     class << self
       def matchers
         {
-          /[^\\]./ => random_letter,
-          /\\d/ => random_number,
-          /\\w/ => random_letter,
-          /\\W/ => random_non_word_character,
-          /\\D/ => random_letter,
-          /\\h/ => random_hexdigit_character,
-          /\\H/ => random_non_hexdigit_character,
-          /\\s/ => " ",
-          /\\S/ => random_letter,
+          /[^\\]./            => random_letter,
+          /\\d/               => random_number,
+          /\\w/               => random_letter,
+          /\\W/               => random_non_word_character,
+          /\\D/               => random_letter,
+          /\\h/               => random_hexdigit_character,
+          /\\H/               => random_non_hexdigit_character,
+          /\\s/               => " ",
+          /\\S/               => random_letter,
+          /\[\[\:alnum\:\]\]/ => random_letter,
+          /\[\[\:alpha\:\]\]/ => random_letter,
+          /\[\[\:digit\:\]\]/ => random_number,
+          /\[\[\:graph\:\]\]/ => random_letter,
+          /\[\[\:lower\:\]\]/ => random_lowercase_letter,
+          /\[\[\:print\:\]\]/ => random_letter,
+          /\[\[\:xdigit\:\]\]/ => random_hexdigit_character,
+          /\[\[\:punct\:\]\]/ => random_non_word_character,
+          /\[\[\:space\:\]\]/ => " ",
+          /\[\[\:cntrl\:\]\]/ => "\a"
         }
       end
 
       private
       def random_letter
+        ("a".."z").to_a.sample
+      end
+
+      def random_lowercase_letter
         ("a".."z").to_a.sample
       end
 
@@ -38,8 +52,8 @@ module Regexpert
 
       def non_word_characters
         [
-          "~", "`", " ", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "+", "=",
-          "{", "}", "[", "]", "\\", "|", "'", "\"", ":", ";", ",", "<", ".", ">", "?", "/"
+          "~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "+", "=",
+          "{", "}", "[", "]", "\\", "|", "'", "\"", ":", ";", ",", ".", "?", "/"
         ]
       end
     end
