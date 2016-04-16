@@ -32,6 +32,14 @@ describe Regexpert do
           expect(Regexpert.generate(expression)).to match expression
         end
       end
+
+      context "nonword characters" do
+        let(:expression) { /\W+/ }
+
+        it "generates a matching string" do
+          expect(Regexpert.generate(expression)).to match expression
+        end
+      end
     end
   end
 end
