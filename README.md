@@ -1,2 +1,2 @@
 # regexpert
-Use a regular expression to generate a matching string
+Regexpert is a tool that takes regular expressions as input and returns strings matching them!
