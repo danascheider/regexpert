@@ -6,5 +6,8 @@ rvm:
 env:
   - COVERAGE=true
 sudo: false
+branches:
+  only:
+    - master
 notifications:
   email: false
