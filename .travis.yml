@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+  - 2.3.0
+  - 2.2.2
+  - 2.1.8
+env:
+  - COVERAGE=true
+sudo: false
+notifications:
+  email: false
