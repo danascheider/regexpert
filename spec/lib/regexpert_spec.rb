@@ -64,6 +64,22 @@ describe Regexpert do
           expect(Regexpert.generate(expression)).to match expression
         end
       end
+
+      context "whitespace" do
+        let(:expression) { /\s+/ }
+
+        it "generates a matching string" do
+          expect(Regexpert.generate(expression)).to match expression
+        end
+      end
+
+      context "non-whitespace" do
+        let(:expression) { /\S+/ }
+
+        it "generates a matching string" do
+          expect(Regexpert.generate(expression)).to match expression
+        end
+      end
     end
   end
 end
