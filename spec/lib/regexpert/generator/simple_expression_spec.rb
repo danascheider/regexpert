@@ -81,6 +81,11 @@ describe Regexpert::Generator do
           it_behaves_like "a matching string generator"
         end
 
+        context "uppercase letters" do
+          let(:expression) { /[[:upper:]]/ }
+          it_behaves_like "a matching string generator"
+        end
+
         context "print character" do
           let(:expression) { /[[:print:]]/ }
           it_behaves_like "a matching string generator"

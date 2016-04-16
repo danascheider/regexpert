@@ -21,7 +21,8 @@ module Regexpert
           /\[\[\:xdigit\:\]\]/ => random_hexdigit_character,
           /\[\[\:punct\:\]\]/ => random_non_word_character,
           /\[\[\:space\:\]\]/ => " ",
-          /\[\[\:cntrl\:\]\]/ => "\a"
+          /\[\[\:cntrl\:\]\]/ => "\a",
+          /\[\[\:upper\:\]\]/ => random_uppercase_letter
         }
       end
 
@@ -32,6 +33,10 @@ module Regexpert
 
       def random_lowercase_letter
         ("a".."z").to_a.sample
+      end
+
+      def random_uppercase_letter
+        ("A".."Z").to_a.sample
       end
 
       def random_number
