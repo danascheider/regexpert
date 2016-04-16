@@ -1,4 +1,6 @@
-describe Regexpert do
+describe Regexpert::Generator do
+  subject { Regexpert::Generator.new }
+
   describe ".generate" do
     context "any number of any characters" do
       let(:expression) { /.*/ }
