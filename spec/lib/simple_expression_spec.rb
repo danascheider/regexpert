@@ -105,5 +105,10 @@ describe Regexpert do
         end
       end
     end
+
+    context "basic sequences" do
+      let(:expression) { /\d+.+/ }
+      it_behaves_like "a matching string generator"
+    end
   end
 end
