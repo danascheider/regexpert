@@ -40,6 +40,22 @@ describe Regexpert do
           expect(Regexpert.generate(expression)).to match expression
         end
       end
+
+      context "non-numeric strings" do
+        let(:expression) { /\D+/ }
+
+        it "generates a matching string" do
+          expect(Regexpert.generate(expression)).to match expression
+        end
+      end
+
+      context "hexdigit characters" do
+        let(:expression) { /\h+/ }
+
+        it "generates a matching string" do
+          expect(Regexpert.generate(expression)).to match expression
+        end
+      end
     end
   end
 end
