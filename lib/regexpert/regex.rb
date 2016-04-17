@@ -32,9 +32,7 @@ module Regexpert
         ("a".."z").to_a.sample
       end
 
-      def random_lowercase_letter
-        ("a".."z").to_a.sample
-      end
+      alias_method :random_lowercase_letter, :random_letter
 
       def random_uppercase_letter
         ("A".."Z").to_a.sample
