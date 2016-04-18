@@ -27,5 +27,13 @@ describe Regexpert::Regex do
         expect(exp.split).to eql [ '\d', '\w' ]
       end
     end
+
+    context "with symbols" do
+      let(:exp) { described_class.new(/.\d+/) }
+
+      it "handles the symbols properly" do
+        expect(exp.split).to eql [ '.', '\d', '+' ]
+      end
+    end
   end
 end
