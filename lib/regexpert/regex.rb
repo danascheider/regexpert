@@ -80,7 +80,7 @@ module Regexpert
     end
 
     def split
-      [ to_s ]
+      to_s.scan(/(\\[a-z])/).flatten
     end
   end
 end

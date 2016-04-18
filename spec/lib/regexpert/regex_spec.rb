@@ -19,5 +19,13 @@ describe Regexpert::Regex do
         expect(exp.split).to eql [ '\d' ]
       end
     end
+
+    context "multiple items" do
+      let(:exp) { described_class.new(/\d\w/) }
+
+      it "returns an array of character classes" do
+        expect(exp.split).to eql [ '\d', '\w' ]
+      end
+    end
   end
 end
