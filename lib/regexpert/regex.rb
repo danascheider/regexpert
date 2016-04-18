@@ -1,5 +1,9 @@
 module Regexpert
   class Regex
+
+    # Class Methods
+    # -------------
+
     class << self
       def matchers
         {
@@ -60,6 +64,19 @@ module Regexpert
           "[", "]", "\\", "'", "\"", ":", ";", ",", ".", "?", "/"
         ]
       end
+    end
+
+    # Instance Methods
+    # ----------------
+
+    attr_reader :expression
+
+    def initialize(exp)
+      @expression = exp
+    end
+
+    def split
+      [expression.inspect[1..-2]]
     end
   end
 end
