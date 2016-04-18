@@ -75,8 +75,12 @@ module Regexpert
       @expression = exp
     end
 
+    def to_s
+      expression.inspect[1..-2]
+    end
+
     def split
-      [expression.inspect[1..-2]]
+      [ to_s ]
     end
   end
 end
