@@ -68,6 +68,14 @@ describe Regexpert::Regex do
           expect(exp.split).to eql [ '\s', '{2,3}' ]
         end
       end
+
+      context "with literals" do
+        let(:exp) { described_class.new(/Jan-\d{2}-2016/) }
+
+        it "captures the literals" do
+          expect(exp.split).to eql [ 'J', 'a', 'n', '-', '\d', '{2}', '-', '2', '0', '1', '6' ]
+        end
+      end
     end
   end
 end
