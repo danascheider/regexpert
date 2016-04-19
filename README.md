@@ -8,4 +8,5 @@ You can install RegXing using <pre><code>gem install regxing</code></pre>, or al
 
 ## Usage
 <pre><code>generator = RegXing::Generator.new(/\d{3}-\d{2}-\d{4}/)
+generator.generate!
 \# => 891-27-2800</code></pre>
