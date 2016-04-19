@@ -3,11 +3,11 @@ module Regexpert
     attr_accessor :regex
 
     def initialize(regex)
-      @regex = regex
+      @regex = Regexpert::Regex.new(regex)
     end
 
     def generate!
-      expression = regex.inspect[1..-2]
+      expression = regex.to_s
       str   = ""
 
       Regex.matchers.each do |exp, val|
