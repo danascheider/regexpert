@@ -80,7 +80,7 @@ module Regexpert
     end
 
     def split
-      to_s.scan(/(\\.|[^\\]?\.|\+|\*|\\[a-z]|[^\\]?[a-z])/).flatten
+      to_s.scan(/(\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-z]|[^\\]?[a-z])/).flatten
     end
   end
 end
