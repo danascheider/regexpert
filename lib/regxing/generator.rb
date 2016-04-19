@@ -7,11 +7,10 @@ module RegXing
     end
 
     def generate!
-      expression = regex.to_s
       str   = ""
 
       regex.split.each do |el|
-        str << compile(el)
+        str << compile(el.first) * el.last
       end
 
       str
@@ -20,7 +19,7 @@ module RegXing
     private
 
     def compile(el)
-      if expr = RegXing::Regex.matchers.find {|exp, val| el.first.match(exp) }
+      if expr = RegXing::Regex.matchers.find {|exp, val| el.match(exp) }
         expr.last
       else
         el

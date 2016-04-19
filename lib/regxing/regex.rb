@@ -105,7 +105,7 @@ module RegXing
         end
       end
 
-      arr.compact
+      arr
     end
   end
 end
