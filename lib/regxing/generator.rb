@@ -1,9 +1,9 @@
-module Regexpert
+module RegXing
   class Generator
     attr_accessor :regex
 
     def initialize(regex)
-      @regex = Regexpert::Regex.new(regex)
+      @regex = RegXing::Regex.new(regex)
     end
 
     def generate!
@@ -20,7 +20,7 @@ module Regexpert
     private
 
     def compile(el)
-      if expr = Regexpert::Regex.matchers.find {|exp, val| el.match(exp) }
+      if expr = RegXing::Regex.matchers.find {|exp, val| el.match(exp) }
         expr.last
       else
         el

@@ -1,4 +1,4 @@
-module Regexpert
+module RegXing
   class Regex
 
     # Class Methods

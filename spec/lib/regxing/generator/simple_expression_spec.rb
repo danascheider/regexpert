@@ -1,4 +1,4 @@
-describe Regexpert::Generator do
+describe RegXing::Generator do
   describe ".generate" do
     context "any number of any characters" do
       let(:expression) { /.*/ }

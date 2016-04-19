@@ -1,4 +1,4 @@
-describe Regexpert::Regex do
+describe RegXing::Regex do
   describe "#to_s" do
     let(:exp) { described_class.new(/.*/) }
 
