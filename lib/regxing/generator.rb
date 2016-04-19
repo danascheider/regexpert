@@ -22,8 +22,6 @@ module RegXing
     def compile(el)
       if expr = RegXing::Regex.matchers.find {|exp, val| el.match(exp) }
         expr.last
-      elsif el.match(/\{\d+\,?\d*\}/)
-        min, max = el.match(/\d+/).to_a
       else
         el
       end
