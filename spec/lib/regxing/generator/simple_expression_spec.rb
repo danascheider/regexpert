@@ -1,4 +1,4 @@
-describe Regexpert do
+describe RegXing::Generator do
   describe ".generate" do
     context "any number of any characters" do
       let(:expression) { /.*/ }
@@ -79,6 +79,11 @@ describe Regexpert do
           it_behaves_like "a matching string generator"
         end
 
+        context "uppercase letters" do
+          let(:expression) { /[[:upper:]]/ }
+          it_behaves_like "a matching string generator"
+        end
+
         context "print character" do
           let(:expression) { /[[:print:]]/ }
           it_behaves_like "a matching string generator"
@@ -104,6 +109,18 @@ describe Regexpert do
           it_behaves_like "a matching string generator"
         end
       end
+
+      context "literals" do
+        context "alphanumeric" do
+          let(:expression) { /a/ }
+          it_behaves_like "a matching string generator"
+        end
+      end
+    end
+
+    context "basic sequences" do
+      let(:expression) { /\d+.+/ }
+      it_behaves_like "a matching string generator"
     end
   end
 end

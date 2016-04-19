@@ -1,5 +1,6 @@
 shared_examples "a matching string generator" do
   it "generates a matching string" do
-    expect(Regexpert.generate(expression)).to match expression
+    generator = RegXing::Generator.new(expression)
+    expect(generator.generate!).to match expression
   end
 end

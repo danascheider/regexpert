@@ -2,8 +2,8 @@
 require_relative "./version"
 
 Gem::Specification.new do |s|
-  s.name                  = "regexpert"
-  s.version               = Regexpert.version
+  s.name                  = "regxing"
+  s.version               = RegXing.version
   s.authors               = ["Dana Scheider"]
   s.description           = "Regex in, string out"
   s.summary               = "rambo-#{s.version}"
