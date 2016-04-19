@@ -7,11 +7,10 @@ module RegXing
     end
 
     def generate!
-      expression = regex.to_s
       str   = ""
 
       regex.split.each do |el|
-        str << compile(el)
+        str << compile(el.first) * el.last
       end
 
       str
