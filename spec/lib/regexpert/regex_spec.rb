@@ -43,5 +43,31 @@ describe Regexpert::Regex do
         expect(exp.split).to eql [ '\d', '+', '\.', '\d', '+' ]
       end
     end
+
+    context "with ranges" do
+      context "with minimum" do
+        let(:exp) { described_class.new(/\w{2,}/) }
+
+        it "captures the expression in the curly braces" do
+          expect(exp.split).to eql [ '\w', '{2,}' ]
+        end
+      end
+
+      context "with maximum" do
+        let(:exp) { described_class.new(/\w{,3}/) }
+
+        it "captures the expression in the curly braces" do
+          expect(exp.split).to eql [ '\w', '{,3}' ]
+        end
+      end
+
+      context "with minimum and maximum" do
+        let(:exp) { described_class.new(/\s{2,3}/) }
+
+        it "captures the expression in the curly braces" do
+          expect(exp.split).to eql [ '\s', '{2,3}' ]
+        end
+      end
+    end
   end
 end
