@@ -35,5 +35,13 @@ describe Regexpert::Regex do
         expect(exp.split).to eql [ '.', '\d', '+' ]
       end
     end
+
+    context "with escaped characters" do
+      let(:exp) { described_class.new(/\d+\.\d+/) }
+
+      it "captures the escape" do
+        expect(exp.split).to eql [ '\d', '+', '\.', '\d', '+' ]
+      end
+    end
   end
 end
