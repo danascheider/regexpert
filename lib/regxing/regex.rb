@@ -34,6 +34,17 @@ module RegXing
         [ /(?<!\\)\*/, /(?<!\\)\+/, /(?<!\\)\?/, /\{\d*\,?\d*\}/ ]
       end
 
+      def process_count_indicator(indicator)
+        if indicator.match count_indicators.last
+          puts "INDICATOR: #{indicator}"
+          minimum = indicator.match(/(?<=\{)\d+/) ? indicator.match(/(?<=\{)\d+/)[0].to_i : 1
+
+          return minimum
+        else
+          return 1
+        end
+      end
+
       private
 
       def random_letter
@@ -87,12 +98,14 @@ module RegXing
       arr = to_s.scan(/\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|\[\[\:.{5,6}\:\]\]|./).flatten
 
       arr.each_with_index do |item, index|
-        if RegXing::Regex.count_indicators.any? {|exp| item.match(exp) }
-          arr[index - 1] += arr.delete_at(index)
+        if RegXing::Regex.count_indicators.any? {|exp| arr[index + 1] && arr[index + 1].match(exp) }
+          arr[index] = [ item, RegXing::Regex.process_count_indicator(arr.delete_at(index + 1)) ]
+        else
+          arr[index] = [item, 1]
         end
       end
 
-      arr
+      arr.compact
     end
   end
 end

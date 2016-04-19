@@ -20,7 +20,7 @@ module RegXing
     private
 
     def compile(el)
-      if expr = RegXing::Regex.matchers.find {|exp, val| el.match(exp) }
+      if expr = RegXing::Regex.matchers.find {|exp, val| el.first.match(exp) }
         expr.last
       else
         el
