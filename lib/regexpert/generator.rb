@@ -11,14 +11,20 @@ module Regexpert
       str   = ""
 
       regex.split.each do |el|
-        if expr = Regexpert::Regex.matchers.find {|exp, val| el.match(exp) }
-          str << expr.last
-        else
-          str << el
-        end
+        str << compile(el)
       end
 
       str
+    end
+
+    private
+
+    def compile(el)
+      if expr = Regexpert::Regex.matchers.find {|exp, val| el.match(exp) }
+        expr.last
+      else
+        el
+      end
     end
   end
 end
