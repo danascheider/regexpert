@@ -32,7 +32,7 @@ describe RegXing::Regex do
       let(:exp) { described_class.new(/.\d+/) }
 
       it "handles the symbols properly" do
-        expect(exp.split).to eql [ '.', '\d', '+' ]
+        expect(exp.split).to eql [ '.', '\d+' ]
       end
     end
 
@@ -40,7 +40,7 @@ describe RegXing::Regex do
       let(:exp) { described_class.new(/\d+\.\d+/) }
 
       it "captures the escape" do
-        expect(exp.split).to eql [ '\d', '+', '\.', '\d', '+' ]
+        expect(exp.split).to eql [ '\d+', '\.', '\d+' ]
       end
     end
 
@@ -49,7 +49,7 @@ describe RegXing::Regex do
         let(:exp) { described_class.new(/\w{2,}/) }
 
         it "captures the expression in the curly braces" do
-          expect(exp.split).to eql [ '\w', '{2,}' ]
+          expect(exp.split).to eql [ '\w{2,}' ]
         end
       end
 
@@ -57,7 +57,7 @@ describe RegXing::Regex do
         let(:exp) { described_class.new(/\w{,3}/) }
 
         it "captures the expression in the curly braces" do
-          expect(exp.split).to eql [ '\w', '{,3}' ]
+          expect(exp.split).to eql [ '\w{,3}' ]
         end
       end
 
@@ -65,7 +65,7 @@ describe RegXing::Regex do
         let(:exp) { described_class.new(/\s{2,3}/) }
 
         it "captures the expression in the curly braces" do
-          expect(exp.split).to eql [ '\s', '{2,3}' ]
+          expect(exp.split).to eql [ '\s{2,3}' ]
         end
       end
 
@@ -73,7 +73,7 @@ describe RegXing::Regex do
         let(:exp) { described_class.new(/Jan-\d{2}-2016/) }
 
         it "captures the literals" do
-          expect(exp.split).to eql [ 'J', 'a', 'n', '-', '\d', '{2}', '-', '2', '0', '1', '6' ]
+          expect(exp.split).to eql [ 'J', 'a', 'n', '-', '\d{2}', '-', '2', '0', '1', '6' ]
         end
       end
     end

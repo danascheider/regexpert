@@ -30,6 +30,10 @@ module RegXing
         }
       end
 
+      def count_indicators
+        [ /(?<!\\)\*/, /(?<!\\)\+/, /(?<!\\)\?/, /\{\d*\,?\d*\}/ ]
+      end
+
       private
 
       def random_letter
@@ -80,7 +84,15 @@ module RegXing
     end
 
     def split
-      to_s.scan(/\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|\[\[\:.{5,6}\:\]\]|./).flatten
+      arr = to_s.scan(/\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|\[\[\:.{5,6}\:\]\]|./).flatten
+
+      arr.each_with_index do |item, index|
+        if RegXing::Regex.count_indicators.any? {|exp| item.match(exp) }
+          arr[index - 1] += arr.delete_at(index)
+        end
+      end
+
+      arr
     end
   end
 end
