@@ -36,7 +36,7 @@ module RegXing
 
       def process_count_indicator(indicator)
         if indicator.match count_indicators.last
-          puts "INDICATOR: #{indicator}"
+
           minimum = indicator.match(/(?<=\{)\d+/) ? indicator.match(/(?<=\{)\d+/)[0].to_i : 1
 
           return minimum
