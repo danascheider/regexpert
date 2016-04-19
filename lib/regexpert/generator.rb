@@ -18,12 +18,6 @@ module Regexpert
         end
       end
 
-      # Regex.matchers.each do |exp, val|
-      #   if expression.match(exp)
-      #     str << val
-      #   end
-      # end
-
       str
     end
   end
