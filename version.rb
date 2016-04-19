@@ -1,5 +1,5 @@
 module Regexpert
-  VERSION = "0.0.1"
+  VERSION = "0.0.1.beta"
 
   def self.version
     VERSION
