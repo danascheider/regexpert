@@ -10,12 +10,8 @@ module Regexpert
       expression = regex.to_s
       str   = ""
 
-      regex.split.each do |el|
-        if expr = Regexpert::Regex.matchers.find {|exp, val| el.match(exp) }
-          str << expr.last
-        else
-          str << el
-        end
+      str << regex.split.each do |el|
+        expr = Regexpert::Regex.matchers.find {|exp, val| el.match(exp) } ? expr.last : el
       end
 
       str
