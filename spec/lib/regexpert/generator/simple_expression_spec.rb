@@ -109,6 +109,13 @@ describe Regexpert::Generator do
           it_behaves_like "a matching string generator"
         end
       end
+
+      context "literals" do
+        context "alphanumeric" do
+          let(:expression) { /a/ }
+          it_behaves_like "a matching string generator"
+        end
+      end
     end
 
     context "basic sequences" do

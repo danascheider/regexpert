@@ -10,11 +10,19 @@ module Regexpert
       expression = regex.to_s
       str   = ""
 
-      Regex.matchers.each do |exp, val|
-        if expression.match(exp)
-          str << val
+      regex.split.each do |el|
+        if expr = Regexpert::Regex.matchers.find {|exp, val| el.match(exp) }
+          str << expr.last
+        else
+          str << el
         end
       end
+
+      # Regex.matchers.each do |exp, val|
+      #   if expression.match(exp)
+      #     str << val
+      #   end
+      # end
 
       str
     end

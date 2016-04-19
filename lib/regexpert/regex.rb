@@ -7,7 +7,7 @@ module Regexpert
     class << self
       def matchers
         {
-          /[^\\]./             => random_letter,
+          /(?<!\\)\./          => random_letter,
           /\\d/                => random_number,
           /\\w/                => random_letter,
           /\\W/                => random_non_word_character,
@@ -60,7 +60,7 @@ module Regexpert
 
       def non_word_characters
         [
-          "~", "!", "@", "#", "%", "&", "*", "(", ")", "-", "{", "}",
+          "!", "@", "#", "%", "&", "*", "(", ")", "-", "{", "}",
           "[", "]", "\\", "'", "\"", ":", ";", ",", ".", "?", "/"
         ]
       end
@@ -80,7 +80,7 @@ module Regexpert
     end
 
     def split
-      to_s.scan(/\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|./).flatten
+      to_s.scan(/\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|\[\[\:.{5,6}\:\]\]|./).flatten
     end
   end
 end
