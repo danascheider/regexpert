@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.version               = RegXing.version
   s.authors               = ["Dana Scheider"]
   s.description           = "Regex in, string out"
-  s.summary               = "rambo-#{s.version}"
+  s.summary               = "regxing-#{s.version}"
   s.email                 = "dana.scheider@gmail.com"
   s.license               = "MIT"
   s.platform              = Gem::Platform::RUBY
