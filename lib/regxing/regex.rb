@@ -34,6 +34,10 @@ module RegXing
         [ /(?<!\\)\*/, /(?<!\\)\+/, /(?<!\\)\?/, /\{\d*\,?\d*\}/ ]
       end
 
+      def anchors
+        [ /^\^/, /\$$/ ]
+      end
+
       def process_count_indicator(indicator)
         if indicator.match count_indicators.last
 
