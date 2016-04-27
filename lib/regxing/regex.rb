@@ -34,6 +34,10 @@ module RegXing
         [ /(?<!\\)\*/, /(?<!\\)\+/, /(?<!\\)\?/, /\{\d*\,?\d*\}/ ]
       end
 
+      def anchors
+        [ /^\^/, /\$$/ ]
+      end
+
       def process_count_indicator(indicator)
         if indicator.match count_indicators.last
 
@@ -94,18 +98,28 @@ module RegXing
       expression.inspect[1..-2]
     end
 
+    def is_anchor(char)
+      RegXing::Regex.anchors.any? {|exp| char.match(exp) }
+    end
+
+    def is_indicator(first, second=nil)
+      RegXing::Regex.count_indicators.any? {|exp| second && second.match(exp) }
+    end
+
     def split
       arr = to_s.scan(/\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|\[\[\:.{5,6}\:\]\]|./).flatten
 
       arr.each_with_index do |item, index|
-        if RegXing::Regex.count_indicators.any? {|exp| arr[index + 1] && arr[index + 1].match(exp) }
+        if is_indicator(item, arr[index + 1])
           arr[index] = [ item, RegXing::Regex.process_count_indicator(arr.delete_at(index + 1)) ]
+        elsif is_anchor(item)
+          arr[index] = nil
         else
           arr[index] = [item, 1]
         end
       end
 
-      arr
+      arr.compact
     end
   end
 end
