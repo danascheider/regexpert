@@ -9,5 +9,10 @@ describe RegXing::Generator do
       let(:expression) { /^\d{3}$/ }
       it_behaves_like "a matching string generator"
     end
+
+    describe "or operators" do
+      let(:expression) { /a|b/ }
+      it_behaves_like "a matching string generator"
+    end
   end
 end
