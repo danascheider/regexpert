@@ -27,8 +27,12 @@ module RegXing
         [ /^\^/, /\$$/ ]
       end
 
+      def posix
+        /\[\[\:[a-z]{5,6}\:\]\]/
+      end
+
       def is_posix?(string)
-        string.match(/^\[\[\:[a-z]{5,6}\:\]\]$/) ? true : false
+        string.match(posix) ? true : false
       end
 
       def process_count_indicator(indicator)
@@ -92,7 +96,7 @@ module RegXing
     end
 
     def extract_groupings
-      to_s.split(/[\(\)\[\]]/).reject {|str| str == "" }
+      to_s.split(/[\(\)\[)\]](?![\[\]])(?<![\[\]])/).reject {|str| str == "" }
     end
 
     def is_anchor(char)
