@@ -106,12 +106,16 @@ module RegXing
       RegXing::Regex.anchors.any? {|exp| char.match(exp) }
     end
 
+    def return_matches(string)
+      string.scan(/\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|\[\[\:.{5,6}\:\]\]|./).flatten
+    end
+
     def is_indicator(first, second=nil)
       RegXing::Regex.count_indicators.any? {|exp| second && second.match(exp) }
     end
 
     def split
-      arr = to_s.scan(/\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|\[\[\:.{5,6}\:\]\]|./).flatten
+      arr = return_matches(to_s)
 
       arr.each_with_index do |item, index|
         if is_indicator(item, arr[index + 1])
