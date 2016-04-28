@@ -98,6 +98,10 @@ module RegXing
       expression.inspect[1..-2]
     end
 
+    def extract_groupings
+      to_s.split(/[\(\)\[\]]/).reject {|str| str == "" }
+    end
+
     def is_anchor(char)
       RegXing::Regex.anchors.any? {|exp| char.match(exp) }
     end
