@@ -27,6 +27,10 @@ module RegXing
         [ /^\^/, /\$$/ ]
       end
 
+      def is_posix?(string)
+        string.match(/^\[\[\:[a-z]{5,6}\:\]\]$/) ? true : false
+      end
+
       def process_count_indicator(indicator)
         if indicator.match count_indicators.last
 

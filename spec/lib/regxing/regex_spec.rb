@@ -1,4 +1,22 @@
 describe RegXing::Regex do
+  describe ".is_posix?" do
+    context "when it is" do
+      let(:str) { "[[:alpha:]]" }
+
+      it "returns true" do
+        expect(described_class.is_posix?(str)).to be true
+      end
+    end
+
+    context "when it isn't" do
+      let(:str) { "[^abc]" }
+
+      it "returns false" do
+        expect(described_class.is_posix?(str)).to be false
+      end
+    end
+  end
+
   describe "#to_s" do
     let(:exp) { described_class.new(/.*/) }
 
