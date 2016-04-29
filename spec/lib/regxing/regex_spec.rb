@@ -94,6 +94,14 @@ describe RegXing::Regex do
           expect(exp.split).to eql [ [ 'J', 1 ], [ 'a', 1 ], [ 'n', 1 ], [ '-', 1 ], [ '\d', 2 ], [ '-', 1 ], [ '2', 1 ], [ '0', 1 ], [ '1', 1 ], [ '6', 1 ] ]
         end
       end
+
+      context "with groupings" do
+        let(:exp) { described_class.new(/(a|b)a(c\d+){2,}/) }
+
+        it "expresses the groupings" do
+          expect(exp.split).to eql [ [ "FOOO" ] ]
+        end
+      end
     end
   end
 

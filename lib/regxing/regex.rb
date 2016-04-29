@@ -35,7 +35,7 @@ module RegXing
       end
 
       def anchors
-        [ /^\^/, /\$$/ ]
+        [ /^\^/, /\$$/, /^\\A/, /\\z$/ ]
       end
 
       def posix
@@ -123,7 +123,7 @@ module RegXing
     end
 
     def split
-      arr = return_matches(to_s)
+      arr = extract_groupings.map {|item| return_matches item }.flatten
 
       arr.each_with_index do |item, index|
         if is_indicator(item, arr[index + 1])
