@@ -92,7 +92,7 @@ module RegXing
     end
 
     def extract_groupings
-      to_s.scan(/(\?)|(\([^\)]*\))|(\[[^\]]*\])|(\*)|([a-zA-Z0-9]*)/).flatten.reject {|str| str.nil? || str == '' }
+      return_matches(to_s).reject {|str| str.nil? || str == '' }
     end
 
     def is_anchor(char)
@@ -100,7 +100,7 @@ module RegXing
     end
 
     def return_matches(string)
-      string.scan(/\\\||\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|\[\[\:.{5,6}\:\]\]|./).flatten
+      string.scan(/\\\||\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|\([^\)]*\)|\[[^\]]*\]|./).flatten
     end
 
     def is_indicator(first, second=nil)
