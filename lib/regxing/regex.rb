@@ -15,18 +15,7 @@ module RegXing
           /\\h/                => random_hexdigit_character,
           /\\H/                => random_non_hexdigit_character,
           /\\s/                => " ",
-          /\\S/                => random_letter,
-          /\[\[\:alnum\:\]\]/  => random_letter,
-          /\[\[\:alpha\:\]\]/  => random_letter,
-          /\[\[\:digit\:\]\]/  => random_number,
-          /\[\[\:graph\:\]\]/  => random_letter,
-          /\[\[\:lower\:\]\]/  => random_lowercase_letter,
-          /\[\[\:print\:\]\]/  => random_letter,
-          /\[\[\:xdigit\:\]\]/ => random_hexdigit_character,
-          /\[\[\:punct\:\]\]/  => random_non_word_character,
-          /\[\[\:space\:\]\]/  => " ",
-          /\[\[\:cntrl\:\]\]/  => "\a",
-          /\[\[\:upper\:\]\]/  => random_uppercase_letter
+          /\\S/                => random_letter
         }
       end
 

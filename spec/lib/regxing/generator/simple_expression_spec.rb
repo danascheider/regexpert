@@ -53,63 +53,6 @@ describe RegXing::Generator do
         end
       end
 
-      context "POSIX bracket expressions" do
-        context "alphanumeric" do
-          let(:expression) { /[[:alnum:]]/ }
-          it_behaves_like "a matching string generator"
-        end
-
-        context "letters" do
-          let(:expression) { /[[:alpha:]]/ }
-          it_behaves_like "a matching string generator"
-        end
-
-        context "numbers" do
-          let(:expression) { /[[:digit:]]/ }
-          it_behaves_like "a matching string generator"
-        end
-
-        context "non-blank characters" do
-          let(:expression) { /[[:graph:]]/ }
-          it_behaves_like "a matching string generator"
-        end
-
-        context "lowercase letters" do
-          let(:expression) { /[[:lower:]]/ }
-          it_behaves_like "a matching string generator"
-        end
-
-        context "uppercase letters" do
-          let(:expression) { /[[:upper:]]/ }
-          it_behaves_like "a matching string generator"
-        end
-
-        context "print character" do
-          let(:expression) { /[[:print:]]/ }
-          it_behaves_like "a matching string generator"
-        end
-
-        context "hexdigit characters" do
-          let(:expression) { /[[:xdigit:]]/ }
-          it_behaves_like "a matching string generator"
-        end
-
-        context "punctuation" do
-          let(:expression) { /[[:punct:]]/ }
-          it_behaves_like "a matching string generator"
-        end
-
-        context "whitespace" do
-          let(:expression) { /[[:space:]]/ }
-          it_behaves_like "a matching string generator"
-        end
-
-        context "control characters" do
-          let(:expression) { /[[:cntrl:]]/ }
-          it_behaves_like "a matching string generator"
-        end
-      end
-
       context "literals" do
         context "alphanumeric" do
           let(:expression) { /a/ }
