@@ -8,3 +8,7 @@ require "rspec/mocks"
 
 require_relative "./support/shared_examples/matching_string_generator"
 require_relative "../lib/regxing"
+
+RSpec.configure do |config|
+  config.order = :random
+end
