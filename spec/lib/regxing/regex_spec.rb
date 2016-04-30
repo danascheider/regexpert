@@ -88,10 +88,10 @@ describe RegXing::Regex do
   end
 
   describe "#extract_groupings" do
-    let(:exp) { described_class.new(/(a|b)c(\d+)?/) }
+    let(:exp) { described_class.new(/(a|b)*c(\d+)?/) }
 
     it "separates the groupings" do
-      expect(exp.extract_groupings).to eql ['a|b', 'c', '\d+', '?']
+      expect(exp.extract_groupings).to eql ['a|b', '*', 'c', '\d+', '?']
     end
   end
 end
