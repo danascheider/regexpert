@@ -7,16 +7,20 @@ module RegXing
     class << self
       def matchers
         {
-          /(?<!\\)\./  => random_letter,
-          /\\d/        => random_number,
-          /\\w/        => random_letter,
-          /\\W/        => random_non_word_character,
-          /\\D/        => random_letter,
-          /\\h/        => random_hexdigit_character,
-          /\\H/        => random_non_hexdigit_character,
-          /\\s/        => " ",
-          /\\S/        => random_letter
+          /(?<!\\)\./ => random_letter,
+          /\\d/       => random_number,
+          /\\w/       => random_letter,
+          /\\W/       => random_non_word_character,
+          /\\D/       => random_letter,
+          /\\h/       => random_hexdigit_character,
+          /\\H/       => random_non_hexdigit_character,
+          /\\s/       => " ",
+          /\\S/       => random_letter
         }
+      end
+
+      def groupings
+        [ /\(.*\)/, /\[.*\]/ ]
       end
 
       def count_indicators
@@ -88,7 +92,7 @@ module RegXing
     end
 
     def extract_groupings
-      to_s.split(/[\(\)\[)\]]/).reject {|str| str == "" }
+      to_s.scan(/(\?)|(\([^\)]*\))|(\[[^\]]*\])|(\*)|([a-zA-Z0-9]*)/).flatten.reject {|str| str.nil? || str == '' }
     end
 
     def is_anchor(char)
