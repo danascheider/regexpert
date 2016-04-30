@@ -88,7 +88,7 @@ module RegXing
     end
 
     def extract_groupings
-      to_s.split(/[\(\)\[)\]](?![\[\]])(?<![\[\]])/).reject {|str| str == "" }
+      to_s.split(/[\(\)\[)\]]/).reject {|str| str == "" }
     end
 
     def is_anchor(char)

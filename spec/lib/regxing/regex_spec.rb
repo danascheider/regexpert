@@ -89,14 +89,9 @@ describe RegXing::Regex do
 
   describe "#extract_groupings" do
     let(:exp) { described_class.new(/(a|b)c(\d+)?/) }
-    let(:posix_exp) { described_class.new(/[[:alpha:]]{3}/) }
 
     it "separates the groupings" do
       expect(exp.extract_groupings).to eql ['a|b', 'c', '\d+', '?']
-    end
-
-    it "keeps POSIX expressions intact" do
-      expect(posix_exp.extract_groupings).to eql ['[[:alpha:]]{3}']
     end
   end
 end
