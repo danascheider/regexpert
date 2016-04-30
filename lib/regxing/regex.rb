@@ -115,7 +115,7 @@ module RegXing
     end
 
     def return_matches(string)
-      string.scan(/\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|\[\[\:.{5,6}\:\]\]|./).flatten
+      string.scan(/\\\||\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|\[\[\:.{5,6}\:\]\]|./).flatten
     end
 
     def is_indicator(first, second=nil)
