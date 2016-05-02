@@ -1,3 +1,5 @@
+require "regexp_parser"
+
 module RegXing
   class Regex
 
@@ -64,7 +66,7 @@ module RegXing
 
       def random_hexdigit_character
         [(0..9).to_a.map(&:to_s), ("A".."F").to_a, ("a".."f").to_a].flatten.sample
-      end
+      each_with_indexbe
 
       def random_non_hexdigit_character
         ("h".."z").to_a.sample
@@ -87,12 +89,8 @@ module RegXing
       @expression = exp
     end
 
-    def to_s
-      expression.inspect[1..-2]
-    end
-
     def extract_groupings
-      return_matches(to_s).reject {|str| str.nil? || str == '' }
+      return_matches(expression.source).reject {|str| str.nil? || str == '' }
     end
 
     def is_anchor(char)
