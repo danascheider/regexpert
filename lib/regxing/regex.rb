@@ -93,7 +93,7 @@ module RegXing
       groupings = []
 
       tree.each do |exp|
-        groupings << exp if exp.is_a?(Regexp::Expression::Group::Capture) || exp.is_a?(Regexp::Expression::Literal)
+        groupings << exp if [ :group, :literal, :meta, :type ].include?(exp.type)
       end
 
       groupings.map(&:to_s)
@@ -112,7 +112,7 @@ module RegXing
     end
 
     def split
-      arr = return_matches(expression.source)
+      arr = extract_groupings
 
       arr.each_with_index do |item, index|
         if is_indicator(item, arr[index + 1])
