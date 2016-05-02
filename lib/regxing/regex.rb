@@ -89,11 +89,11 @@ module RegXing
       groupings.map(&:to_s)
     end
 
-    def is_anchor(char)
+    def is_anchor?(char)
       RegXing::Regex.anchors.any? {|exp| char.match(exp) }
     end
 
-    def is_indicator(first, second=nil)
+    def is_indicator?(first, second=nil)
       RegXing::Regex.count_indicators.any? {|exp| second && second.match(exp) }
     end
 
@@ -108,9 +108,9 @@ module RegXing
       p arr
 
       arr.each_with_index do |item, index|
-        if is_indicator(item, arr[index + 1])
+        if is_indicator?(item, arr[index + 1])
           arr[index] = [ item, RegXing::Regex.process_count_indicator(arr.delete_at(index + 1)) ]
-        elsif is_anchor(item)
+        elsif is_anchor?(item)
           arr[index] = nil
         else
           arr[index] = [item, 1]
