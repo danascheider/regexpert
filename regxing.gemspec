@@ -12,6 +12,8 @@ Gem::Specification.new do |s|
   s.platform              = Gem::Platform::RUBY
   s.required_ruby_version = ">= 2.1.0"
 
+  s.add_dependency "regexp_parser", "~> 0.3"
+
   s.add_development_dependency "rspec", "~> 3.3"
   s.add_development_dependency "coveralls", "~> 0.7"
   s.add_development_dependency "rake", "~> 11.0"
