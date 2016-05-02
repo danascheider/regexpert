@@ -32,11 +32,6 @@ describe RegXing::Generator do
           it_behaves_like "a matching string generator"
         end
 
-        context "non-hexdigit characters" do
-          let(:expression) { /\H+/ }
-          it_behaves_like "a matching string generator"
-        end
-
         context "whitespace" do
           let(:expression) { /\s+/ }
           it_behaves_like "a matching string generator"

@@ -14,7 +14,6 @@ module RegXing
           /\\w/       => random_letter,
           /\\W/       => random_non_word_character,
           /\\D/       => random_letter,
-          /\\H/       => random_non_hexdigit_character,
           /\\s/       => " ",
           /\\S/       => random_letter
         }
@@ -61,10 +60,6 @@ module RegXing
 
       def random_non_word_character
         non_word_characters.sample
-      end
-
-      def random_non_hexdigit_character
-        ("h".."z").to_a.sample
       end
 
       def non_word_characters
