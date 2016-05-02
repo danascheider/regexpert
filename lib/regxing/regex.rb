@@ -14,7 +14,6 @@ module RegXing
           /\\w/       => random_letter,
           /\\W/       => random_non_word_character,
           /\\D/       => random_letter,
-          /\\h/       => random_hexdigit_character,
           /\\H/       => random_non_hexdigit_character,
           /\\s/       => " ",
           /\\S/       => random_letter
@@ -64,10 +63,6 @@ module RegXing
         non_word_characters.sample
       end
 
-      def random_hexdigit_character
-        [(0..9).to_a.map(&:to_s), ("A".."F").to_a, ("a".."f").to_a].flatten.sample
-      end
-
       def random_non_hexdigit_character
         ("h".."z").to_a.sample
       end
@@ -89,7 +84,7 @@ module RegXing
       @expression = exp
     end
 
-    def extract_groupings
+    def extract_groupings(str=expression)
       groupings = []
 
       tree.each do |exp|
@@ -113,6 +108,13 @@ module RegXing
 
     def split
       arr = extract_groupings
+      array = []
+
+      arr.each do |str|
+        array << extract_groupings(Regexp.new(str))
+      end
+
+      p arr
 
       arr.each_with_index do |item, index|
         if is_indicator(item, arr[index + 1])
