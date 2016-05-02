@@ -66,7 +66,7 @@ module RegXing
 
       def random_hexdigit_character
         [(0..9).to_a.map(&:to_s), ("A".."F").to_a, ("a".."f").to_a].flatten.sample
-      each_with_indexbe
+      end
 
       def random_non_hexdigit_character
         ("h".."z").to_a.sample
@@ -90,7 +90,14 @@ module RegXing
     end
 
     def extract_groupings
-      return_matches(expression.source).reject {|str| str.nil? || str == '' }
+      tree = Regexp::Parser.parse(expression, 'ruby/2.1')
+      groupings = []
+
+      tree.each_expression(0) do |exp, level_index|
+        groupings << exp if exp.is_a?(Regexp::Expression::Group::Capture) || exp.is_a?(Regexp::Expression::Literal)
+      end
+
+      groupings.map(&:to_s)
     end
 
     def is_anchor(char)
@@ -106,7 +113,7 @@ module RegXing
     end
 
     def split
-      arr = extract_groupings.map {|item| return_matches item }.flatten
+      arr = return_matches(expression.source)
 
       arr.each_with_index do |item, index|
         if is_indicator(item, arr[index + 1])
