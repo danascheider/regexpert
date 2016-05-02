@@ -91,9 +91,10 @@ module RegXing
 
     def extract_groupings
       tree = Regexp::Parser.parse(expression, 'ruby/2.1')
+
       groupings = []
 
-      tree.each_expression(0) do |exp, level_index|
+      tree.each do |exp|
         groupings << exp if exp.is_a?(Regexp::Expression::Group::Capture) || exp.is_a?(Regexp::Expression::Literal)
       end
 
