@@ -90,8 +90,6 @@ module RegXing
     end
 
     def extract_groupings
-      tree = Regexp::Parser.parse(expression, 'ruby/2.1')
-
       groupings = []
 
       tree.each do |exp|
@@ -127,6 +125,12 @@ module RegXing
       end
 
       arr.compact
+    end
+
+    private
+
+    def tree
+      Regexp::Parser.parse(expression, 'ruby/2.1')
     end
   end
 end
