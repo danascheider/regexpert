@@ -93,10 +93,6 @@ module RegXing
       RegXing::Regex.anchors.any? {|exp| char.match(exp) }
     end
 
-    def return_matches(string)
-      string.scan(/\\\||\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|\([^\)]*\)|\[[^\]]*\]|./).flatten
-    end
-
     def is_indicator(first, second=nil)
       RegXing::Regex.count_indicators.any? {|exp| second && second.match(exp) }
     end
