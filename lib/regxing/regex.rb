@@ -1,3 +1,5 @@
+require "regexp_parser"
+
 module RegXing
   class Regex
 
@@ -7,16 +9,18 @@ module RegXing
     class << self
       def matchers
         {
-          /(?<!\\)\./          => random_letter,
-          /\\d/                => random_number,
-          /\\w/                => random_letter,
-          /\\W/                => random_non_word_character,
-          /\\D/                => random_letter,
-          /\\h/                => random_hexdigit_character,
-          /\\H/                => random_non_hexdigit_character,
-          /\\s/                => " ",
-          /\\S/                => random_letter
+          /(?<!\\)\./ => random_letter,
+          /\\d/       => random_number,
+          /\\w/       => random_letter,
+          /\\W/       => random_non_word_character,
+          /\\D/       => random_letter,
+          /\\s/       => " ",
+          /\\S/       => random_letter
         }
+      end
+
+      def groupings
+        [ /\(.*\)/, /\[.*\]/ ]
       end
 
       def count_indicators
@@ -24,7 +28,7 @@ module RegXing
       end
 
       def anchors
-        [ /^\^/, /\$$/ ]
+        [ /^\^/, /\$$/, /^\\A/, /\\z$/ ]
       end
 
       def process_count_indicator(indicator)
@@ -58,14 +62,6 @@ module RegXing
         non_word_characters.sample
       end
 
-      def random_hexdigit_character
-        [(0..9).to_a.map(&:to_s), ("A".."F").to_a, ("a".."f").to_a].flatten.sample
-      end
-
-      def random_non_hexdigit_character
-        ("h".."z").to_a.sample
-      end
-
       def non_word_characters
         [
           "!", "@", "#", "%", "&", "*", "(", ")", "-", "{", "}",
@@ -83,32 +79,55 @@ module RegXing
       @expression = exp
     end
 
-    def to_s
-      expression.inspect[1..-2]
-    end
+    def extract_groupings
+      groupings = []
 
-    def is_anchor(char)
-      RegXing::Regex.anchors.any? {|exp| char.match(exp) }
-    end
+      tree.each do |exp|
+        groupings << exp if [ :group, :literal, :meta, :type, :escape ].include?(exp.type)
+      end
 
-    def is_indicator(first, second=nil)
-      RegXing::Regex.count_indicators.any? {|exp| second && second.match(exp) }
+      groupings
     end
 
     def split
-      arr = to_s.scan(/\\\?|[^\\]?\?|\\\.|[^\\]?\.|\\\+|[^\\]?\+|\\\*|[^\\]?\*|\\[a-zA-Z]|(?<!\\)[a-zA-Z]|\{\d*\,?\d*\}|\[\[\:.{5,6}\:\]\]|./).flatten
+      groupings = process_groupings(extract_groupings)
 
-      arr.each_with_index do |item, index|
-        if is_indicator(item, arr[index + 1])
-          arr[index] = [ item, RegXing::Regex.process_count_indicator(arr.delete_at(index + 1)) ]
-        elsif is_anchor(item)
-          arr[index] = nil
+      groupings.each_with_index do |item, index|
+
+        if is_indicator?(item, groupings[index + 1])
+          groupings[index] = [ item, RegXing::Regex.process_count_indicator(groupings.delete_at(index + 1)) ]
+        elsif is_anchor?(item)
+          groupings[index] = nil
         else
-          arr[index] = [item, 1]
+          groupings[index] = [item, 1]
         end
       end
 
-      arr.compact
+      groupings.compact
+    end
+
+    private
+
+    def process_groupings(groupings)
+      groupings.map do |grouping|
+        if grouping.type == :literal
+          grouping.to_s.split("")
+        else
+          grouping.to_s.scan(/(\\\.)|((?<!\\)\*)|((?<!\\)\+)|((?<!\\)\?)|(\{\d*\,?\d*\})|(\\d)|((?<!\\)\.)|(\\w)|(\\s)/)
+        end
+      end.flatten.compact
+    end
+
+    def tree
+      Regexp::Parser.parse(expression, 'ruby/2.1')
+    end
+
+    def is_anchor?(char)
+      RegXing::Regex.anchors.any? {|exp| char.match(exp) }
+    end
+
+    def is_indicator?(first, second=nil)
+      RegXing::Regex.count_indicators.any? {|exp| second && second.match(exp) }
     end
   end
 end

@@ -1,16 +1,4 @@
 describe RegXing::Regex do
-  describe "#to_s" do
-    let(:exp) { described_class.new(/.*/) }
-
-    it "converts to a string" do
-      expect(exp.to_s).to be_a String
-    end
-
-    it "removes the slashes" do
-      expect(exp.to_s).to eql ".*"
-    end
-  end
-
   describe "#split" do
     context "basic case" do
       let(:exp) { described_class.new(/\d/) }
@@ -76,6 +64,23 @@ describe RegXing::Regex do
           expect(exp.split).to eql [ [ 'J', 1 ], [ 'a', 1 ], [ 'n', 1 ], [ '-', 1 ], [ '\d', 2 ], [ '-', 1 ], [ '2', 1 ], [ '0', 1 ], [ '1', 1 ], [ '6', 1 ] ]
         end
       end
+
+      context "with groupings" do
+        let(:exp) { described_class.new(/(a|b)a(c\d+){2,}/) }
+
+        it "expresses the groupings" do
+          pending "Handle nested groupings"
+          expect(exp.split).to eql [ [ [ 'a', 1 ], 1 ], [ 'a', 1 ], [ [ [ 'c', 1], [ '4', 1 ] ], 2 ] ]
+        end
+      end
+    end
+  end
+
+  describe "#extract_groupings" do
+    let(:exp) { described_class.new(/(a|b)*c(\d+)?/) }
+
+    it "separates the groupings" do
+      expect(exp.extract_groupings.map(&:to_s)).to eql [ '(a|b)*', 'c', '(\d+)?' ]
     end
   end
 end
