@@ -90,13 +90,7 @@ module RegXing
     end
 
     def split
-      groupings = extract_groupings.map do |grouping|
-        if grouping.type == :literal
-          grouping.to_s.split("")
-        else
-          grouping.to_s.scan(/(\\\.)|((?<!\\)\*)|((?<!\\)\+)|((?<!\\)\?)|(\{\d*\,?\d*\})|(\\d)|((?<!\\)\.)|(\\w)|(\\s)/)
-        end
-      end.flatten.compact
+      groupings = process_groupings(extract_groupings)
 
       groupings.each_with_index do |item, index|
 
@@ -113,6 +107,16 @@ module RegXing
     end
 
     private
+
+    def process_groupings(groupings)
+      groupings.map do |grouping|
+        if grouping.type == :literal
+          grouping.to_s.split("")
+        else
+          grouping.to_s.scan(/(\\\.)|((?<!\\)\*)|((?<!\\)\+)|((?<!\\)\?)|(\{\d*\,?\d*\})|(\\d)|((?<!\\)\.)|(\\w)|(\\s)/)
+        end
+      end.flatten.compact
+    end
 
     def tree
       Regexp::Parser.parse(expression, 'ruby/2.1')
