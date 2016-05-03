@@ -98,24 +98,22 @@ module RegXing
     end
 
     def split
-      arr = extract_groupings
-      array = []
+      groupings = extract_groupings.map do |grouping|
+        grouping.scan(/((?<!\\)\*)|((?<!\\)\+)|((?<!\\)\?)|(\{\d*\,?\d*\})|(\\d)|((?<!\\)\.)|(\\w)/)
+      end.flatten.compact
 
-      arr.each do |str|
-        array << extract_groupings(str)
-      end
+      groupings.each_with_index do |item, index|
 
-      arr.each_with_index do |item, index|
-        if is_indicator?(item, arr[index + 1])
-          arr[index] = [ item, RegXing::Regex.process_count_indicator(arr.delete_at(index + 1)) ]
+        if is_indicator?(item, groupings[index + 1])
+          groupings[index] = [ item, RegXing::Regex.process_count_indicator(groupings.delete_at(index + 1)) ]
         elsif is_anchor?(item)
-          arr[index] = nil
+          groupings[index] = nil
         else
-          arr[index] = [item, 1]
+          groupings[index] = [item, 1]
         end
       end
 
-      arr.compact
+      groupings.compact
     end
 
     private
