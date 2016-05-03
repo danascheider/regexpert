@@ -15,14 +15,14 @@ describe RegXing::Generator do
       it_behaves_like "a matching string generator"
     end
 
-    describe "or operators" do
-      let(:expression) { /a|b/ }
-      it_behaves_like "a matching string generator"
+    describe "alternators" do
+      # let(:expression) { /a|b/ }
+      # it_behaves_like "a matching string generator"
     end
 
     describe "groupings" do
-      let(:expression) { /(a|b)efg(c\d+){2}/ }
-      it_behaves_like "a matching string generator"
+      # let(:expression) { /(a|b)efg(c\d+){2}/ }
+      # it_behaves_like "a matching string generator"
     end
   end
 end
