@@ -90,14 +90,6 @@ module RegXing
       groupings
     end
 
-    def is_anchor?(char)
-      RegXing::Regex.anchors.any? {|exp| char.match(exp) }
-    end
-
-    def is_indicator?(first, second=nil)
-      RegXing::Regex.count_indicators.any? {|exp| second && second.match(exp) }
-    end
-
     def split
       groupings = extract_groupings.map do |grouping|
         if grouping.type == :literal
@@ -125,6 +117,14 @@ module RegXing
 
     def tree
       Regexp::Parser.parse(expression, 'ruby/2.1')
+    end
+
+    def is_anchor?(char)
+      RegXing::Regex.anchors.any? {|exp| char.match(exp) }
+    end
+
+    def is_indicator?(first, second=nil)
+      RegXing::Regex.count_indicators.any? {|exp| second && second.match(exp) }
     end
   end
 end
