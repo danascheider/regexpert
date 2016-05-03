@@ -79,8 +79,7 @@ module RegXing
       @expression = exp
     end
 
-    def extract_groupings(str=expression)
-      p str
+    def extract_groupings
       groupings = []
 
       tree.each do |exp|
