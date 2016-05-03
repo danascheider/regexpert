@@ -102,10 +102,8 @@ module RegXing
       array = []
 
       arr.each do |str|
-        array << extract_groupings(Regexp.new(str))
+        array << extract_groupings(str)
       end
-
-      p arr
 
       arr.each_with_index do |item, index|
         if is_indicator?(item, arr[index + 1])
