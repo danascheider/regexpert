@@ -93,7 +93,6 @@ module RegXing
       groupings = process_groupings(extract_groupings)
 
       groupings.each_with_index do |item, index|
-
         if is_indicator?(item, groupings[index + 1])
           groupings[index] = [ item, RegXing::Regex.process_count_indicator(groupings.delete_at(index + 1)) ]
         elsif is_anchor?(item)
