@@ -100,7 +100,11 @@ module RegXing
 
     def split
       groupings = extract_groupings.map do |grouping|
-        grouping.to_s.scan(/(\\\.)|((?<!\\)\*)|((?<!\\)\+)|((?<!\\)\?)|(\{\d*\,?\d*\})|(\\d)|((?<!\\)\.)|(\\w)|(\\s)/)
+        if grouping.type == :literal
+          grouping.to_s.split("")
+        else
+          grouping.to_s.scan(/(\\\.)|((?<!\\)\*)|((?<!\\)\+)|((?<!\\)\?)|(\{\d*\,?\d*\})|(\\d)|((?<!\\)\.)|(\\w)|(\\s)/)
+        end
       end.flatten.compact
 
       groupings.each_with_index do |item, index|
