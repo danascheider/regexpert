@@ -80,13 +80,14 @@ module RegXing
     end
 
     def extract_groupings(str=expression)
+      p str
       groupings = []
 
       tree.each do |exp|
-        groupings << exp if [ :group, :literal, :meta, :type ].include?(exp.type)
+        groupings << exp if [ :group, :literal, :meta, :type, :escape ].include?(exp.type)
       end
 
-      groupings.map(&:to_s)
+      groupings
     end
 
     def is_anchor?(char)
@@ -99,7 +100,7 @@ module RegXing
 
     def split
       groupings = extract_groupings.map do |grouping|
-        grouping.scan(/((?<!\\)\*)|((?<!\\)\+)|((?<!\\)\?)|(\{\d*\,?\d*\})|(\\d)|((?<!\\)\.)|(\\w)/)
+        grouping.to_s.scan(/(\\\.)|((?<!\\)\*)|((?<!\\)\+)|((?<!\\)\?)|(\{\d*\,?\d*\})|(\\d)|((?<!\\)\.)|(\\w)|(\\s)/)
       end.flatten.compact
 
       groupings.each_with_index do |item, index|
