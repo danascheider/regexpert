@@ -4,7 +4,7 @@
 RegXing is a tool that takes regular expressions as input and returns strings matching them!
 
 ## Installation
-You can install RegXing using <pre><code>gem install regxing</code></pre>, or alternatively, you can add to your project's Gemfile: <pre><code>gem "regxing", "~> 0.1.0"</code></pre>
+You can install RegXing using <pre><code>gem install regxing</code></pre> or alternatively, you can add to your project's Gemfile: <pre><code>gem "regxing", "~> 0.1.0"</code></pre>
 
 ## Usage
 <pre><code>generator = RegXing::Generator.new(/\d{3}-\d{2}-\d{4}/)
