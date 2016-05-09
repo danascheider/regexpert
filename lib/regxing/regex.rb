@@ -19,10 +19,6 @@ module RegXing
         }
       end
 
-      def groupings
-        [ /\(.*\)/, /\[.*\]/ ]
-      end
-
       def count_indicators
         [ /(?<!\\)\*/, /(?<!\\)\+/, /(?<!\\)\?/, /\{\d*\,?\d*\}/ ]
       end
