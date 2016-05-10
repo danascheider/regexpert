@@ -66,9 +66,18 @@ describe RegXing::Regex do
       end
 
       context "with groupings" do
+        let(:exp) { described_class.new(/a(c\d+){2,}/) }
+
+        it "expresses the groupings" do
+          expect(exp.split).to eql [ [ 'a', 1 ], [ [ [ 'c', 1 ], [ '\d', 1 ] ], 2 ] ]
+        end
+      end
+
+      context "with more complex groupings" do
         let(:exp) { described_class.new(/(a|b)a(c\d+){2,}/) }
 
         it "expresses the groupings" do
+          pending "Deal with the simple groupings first"
           expect(exp.split).to eql [ [ 'a', 1 ], [ 'a', 1 ], [ [ [ 'c', 1], [ '\d', 1 ] ], 2 ] ]
         end
       end
