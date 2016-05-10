@@ -69,7 +69,7 @@ describe RegXing::Regex do
         let(:exp) { described_class.new(/(a|b)a(c\d+){2,}/) }
 
         it "expresses the groupings" do
-          expect(exp.split).to eql [ [ [ 'a', 1 ], 1 ], [ 'a', 1 ], [ [ [ 'c', 1], [ '4', 1 ] ], 2 ] ]
+          expect(exp.split).to eql [ [ 'a', 1 ], [ 'a', 1 ], [ [ [ 'c', 1], [ '\d', 1 ] ], 2 ] ]
         end
       end
     end
